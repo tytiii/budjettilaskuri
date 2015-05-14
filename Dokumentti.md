@@ -1,6 +1,4 @@
-# budjettilaskuri
-
-Aihem‰‰rittely
+# Aihem‰‰rittely
 
 Aihe: Budjettilaskuri.
 
