@@ -13,5 +13,5 @@ Aihem‰‰rittelyn kirjoittaminen, tuntikirjanpidon, aihem‰‰rittelyn ja NetBeans pr
 Ohjelmoinnin aloittamista (uudet luokat: uusi k‰ytt‰j‰ ja tapahtuma)
 
 21.5.2015
-30min
-Luokkakaavio
+1h
+Luokkakaavio ja ohjelmointia
