@@ -3,9 +3,10 @@
  * and open the template in the editor.
  */
 package budjettilaskuri.budjettilaskuri;
+import java.text.DecimalFormat;
 
 /**
- *  
+ *  Luokka Budjettilaskurin tapahtumille
  * @author mylly
  */
 public class Tapahtuma {
@@ -49,5 +50,36 @@ public class Tapahtuma {
         if(nimi.length() == 0) this.nimi = "-";
     }
     
-    public double ()
+    /** Hakee tapahtuman arvon
+     * 
+     * @return
+     */
+    
+    public double haeArvo() {
+        return this.arvo;
+    }
+    
+    /** Hakee tapahtuman paivamaaran
+     * 
+     * @return 
+     */
+    
+    public String haePaivamaara() {
+        return this.paivamaara;
+    }
+    
+    /** Hakee tapahtuman nimen
+     * 
+     * @return 
+     */
+    
+    public String haeNimi() {
+        return this.nimi;
+    }
+    
+    public String toString() {
+        DecimalFormat tulostus = new DecimalFormat("####.##");
+        
+        return (this.nimi + " " + tulostus.format(this.arvo) + "euroa ");
+    }
 }
