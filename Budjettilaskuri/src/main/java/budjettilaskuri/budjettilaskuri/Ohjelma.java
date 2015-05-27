@@ -8,9 +8,10 @@ package budjettilaskuri.budjettilaskuri;
  *
  * @author mylly
  */
-public class Main {
+public class Ohjelma {
     
-   public static void main(String[] args) {
-       new Ohjelma();
-   }
+  
+        
+    
+    
 }

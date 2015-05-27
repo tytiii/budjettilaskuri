@@ -22,7 +22,7 @@ public class Tapahtuma {
         this.nimi = "-";
     }
     
-    /** Asettaa tapahtuman arvo
+    /** Asettaa tapahtuman arvon
      * 
      * @param arvo 
      */

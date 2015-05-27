@@ -3,14 +3,12 @@
  * and open the template in the editor.
  */
 package budjettilaskuri.budjettilaskuri;
+import java.util.ArrayList;
 
 /**
  *
  * @author mylly
  */
-public class Main {
+public class AvaaKayttaja {
     
-   public static void main(String[] args) {
-       new Ohjelma();
-   }
 }
