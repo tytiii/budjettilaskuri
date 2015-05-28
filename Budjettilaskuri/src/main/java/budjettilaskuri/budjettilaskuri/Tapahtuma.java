@@ -15,7 +15,9 @@ public class Tapahtuma {
     private String paivamaara;
     private String nimi;
     
-          
+    /**Konstruktori
+     * 
+     */      
     public Tapahtuma(){
         this.arvo = 0;
         this.paivamaara = "-";
