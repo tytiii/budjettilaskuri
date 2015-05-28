@@ -15,3 +15,15 @@ Ohjelmoinnin aloittamista (uudet luokat: uusi käyttäjä ja tapahtuma)
 21.5.2015
 1h
 Luokkakaavio ja ohjelmointia
+
+26.5.2015
+1h
+Ohjelmointia
+
+28.5.2015
+1h
+JUnit testeihin tutustuminen (En vielä osaa kyllä omalle ohjelmalleni toteuttaa)
+
+28.5.2015
+1h
+Luokkakaavio ja ohjelmointia
