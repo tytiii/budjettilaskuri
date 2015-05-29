@@ -79,45 +79,4 @@ public class TapahtumaVarasto {
 //        this.tapahtumat.remove(t);
 //        this.tallennaTapahtumat();
 //    }
-
-    /** Lataa tapahtumat tiedostosta
-     * 
-     */
-    
-//     public void lataaTapahtumat(){
-//        this.tapahtumat.clear();
-//        Scanner s = null;
-//        File f = new File(this.nimi + ".dat");
-//        if(!f.exists()) return;
-//       
-//            s = new Scanner(f);
-//            while (s.hasNextLine()) {
-//                String rivi = s.nextLine();
-//                String[] data = rivi.split("[|]");
-//                Tapahtuma t = new Tapahtuma();
-//                t.asetaArvo(Double.parseDouble(data[0]));
-//                t.asetaPaivamaara(data[1]);
-//                t.asetaNimi(data[3]);
-//                this.tapahtumat.add(t);
-//            
-//        }
-//    }
-   
-     /**Tallentaa tapahtumat tiedostoon
-      * 
-      */
-     
-//    public void tallennaTapahtumat(){
-//        FileOutputStream fos = null;
-//        try {
-//            fos = new FileOutputStream(this.nimi + ".dat");
-//            PrintWriter pw = new PrintWriter(fos);
-//            for (Tapahtuma t : tapahtumat) {
-//                pw.println(t.haeArvo() + "|" + t.haePaivamaara() + "|" + t.haeNimi());
-//            }
-//            pw.close();
-//        } catch (FileNotFoundException ex) {
-//            new Virhe("Tiedostoa " + this.nimi + ".dat ei löydy!");
-//        }
-//    }    
 }
