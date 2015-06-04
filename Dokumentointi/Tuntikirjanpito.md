@@ -27,3 +27,27 @@ JUnit testeihin tutustuminen (En vielä osaa kyllä omalle ohjelmalleni toteuttaa)
 28.5.2015
 1h
 Luokkakaavio ja ohjelmointia
+
+29.5.2015
+2h 
+Koodausta
+
+30.5.2015
+3h
+Koodia, graafisen käyttäliittymän aloitus
+
+31.5.2015
+2h
+Koodia, graafisen käyttöliittymän teko jatkuu
+
+1.6.2015
+2h
+Koodia, graafinen käyttöliittymä
+
+2.6.2015
+1h 
+Testien ihmettelyä. Jotain sain aikaankin, mutta en edelleenkään tiedä miksi NetBeans luo testeistä vain tyhjän pit-tiedoston :(
+
+4.6.2015
+2h 
+Kaksi sekvenssikaaviota, myöhemmin lisää. Vähän koodia
