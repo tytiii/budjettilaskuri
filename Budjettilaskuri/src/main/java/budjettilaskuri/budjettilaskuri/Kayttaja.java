@@ -9,12 +9,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 /**
- *Kayttaja data
+ *Kasittelee kayttaja data
  * @author mylly
  */
 public class Kayttaja {
     
     private ArrayList<String> kayttajat;
+    
+    /**Konstruktori 
+     * 
+     */
     
     public Kayttaja() {
         this.kayttajat = new ArrayList<String>();
@@ -35,9 +39,9 @@ public class Kayttaja {
         }
     }
     
-    /** Hakee kaikki kayttajat
-     * 
-     * @return 
+    /** 
+     * Hakee kaikki kayttajat
+     * @return Kaikki kayttajat
      */
     
     public ArrayList<String> haeKayttajat() {
@@ -46,9 +50,8 @@ public class Kayttaja {
     
     /** Lisaa kayttajan
      * 
-     * @param kayttaja
-     * @return 
-     * 
+     * @param s Lisattava kayttajanimi
+     * @return Kertoo, onnistuiko lisäys
      */
     
     public boolean lisaaKayttaja (String s) {

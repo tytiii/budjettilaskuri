@@ -27,12 +27,6 @@ public class TapahtumaTest {
        
     }
     
-    @Test
-    public void asetaArvoasettaaArvonOikein() {
-        tapahtuma.asetaArvo(10);
-        assertEquals("Tapahtuman arvo on 10 euroa", tapahtuma.toString());
-    }
-    
     @AfterClass
     public static void tearDownClass() {
     }
@@ -43,6 +37,45 @@ public class TapahtumaTest {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void asetaArvoAsettaaArvonOikein() {
+        tapahtuma.asetaArvo(10);
+        assertEquals("Tapahtuman arvo on 10 euroa", tapahtuma.toString());
+    }
+    
+    @Test
+    public void asetaPaivamaaraAsettaaPaivamaaranOikein () {
+        tapahtuma.asetaPaivamaara("01022015");
+        assertEquals("Tahtuman päivämäärä on 01.02.2015", tapahtuma.toString());
+    }
+    
+    @Test
+    public void asetaNimiAsettaaNimenOikein () {
+        tapahtuma.asetaNimi("Palkka");
+        assertEquals("Tapahtuman nimi on palkka", tapahtuma.toString());
+    }
+    
+    @Test
+    public void haeArvoHakeeOikeanArvon() {
+        tapahtuma.asetaArvo(15);
+        tapahtuma.haeArvo();
+        assertEquals("Tapahtuman arvo on 15", tapahtuma.toString());
+    }
+    
+    @Test
+    public void haePaivamaaraHakeeOikeanPaivamaaran() {
+        tapahtuma.asetaPaivamaara("02032015");
+        tapahtuma.haePaivamaara();
+        assertEquals("Tapahtuman päivämäärä on", tapahtuma.toString());
+    }
+    
+    @Test
+    public void haeNimiHakeeOikeanNimen() {
+        tapahtuma.asetaNimi("Ruoka");
+        tapahtuma.haeNimi();
+        assertEquals("Tapahtuman nimi on", tapahtuma.toString());
     }
 
     /**

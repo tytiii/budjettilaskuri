@@ -24,11 +24,11 @@ public class TapahtumaVarasto {
      * @param nimi Käyttäjän nimi
      */
     
-//    public TapahtumaVarasto(String nimi){
-//        this.nimi = nimi.toLowerCase();
-//        this.tapahtumat = new ArrayList<Tapahtuma>();
-//        this.lataaTapahtumat();
-//    }
+    public TapahtumaVarasto(String nimi){
+        this.nimi = nimi.toLowerCase();
+        this.tapahtumat = new ArrayList<Tapahtuma>();
+     //   this.lataaTapahtumat();
+    }
     
     /** Hakee tietyn kuukauden kaikki tapahtumat
      * 
@@ -56,27 +56,29 @@ public class TapahtumaVarasto {
      * @return Kayttajan nimi
      */
     
-    public String haeNimi() {
-        return this.nimi;
-    }
-
-    /** Lisaa uuden tapahtuman
-     * 
-     * @param t Uusi tapahtuma
-     */
-    
+//    public String haeNimi() {
+//        return this.nimi;
+//    }
+//
+//    /** Lisaa uuden tapahtuman
+//     * 
+//     * @param t Uusi tapahtuma
+//     */
+//    
 //    public void lisaaTapahtuma(Tapahtuma t){
 //        this.tapahtumat.add(t);
 //        this.tallennaTapahtumat();
 //    }
-    
-    /** Poistaa tapahtuman
-     * 
-     * @param t Poistettava tapahtuma
-     */
-    
+//    
+//    /** Poistaa tapahtuman
+//     * 
+//     * @param t Poistettava tapahtuma
+//     */
+//    
 //    public void poistaTapahtuma(Tapahtuma t){
 //        this.tapahtumat.remove(t);
 //        this.tallennaTapahtumat();
 //    }
+    
+    
 }

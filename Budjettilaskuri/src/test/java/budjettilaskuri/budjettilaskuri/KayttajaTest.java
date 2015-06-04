@@ -37,6 +37,14 @@ public class KayttajaTest {
     public void tearDown() {
     }
 
+    @Test
+    public void haeKayttajat(){
+        ArrayList<String >Kayttaja = new ArrayList<String>();
+        ArrayList<String> tulos = Kayttaja.haeKayttajat();
+        ArrayList<String> odotettuTulos = null;
+        assertEquals(odotettuTulos, tulos);
+    }
+    
     /**
      * Test of haeKayttajat method, of class Kayttaja.
      */

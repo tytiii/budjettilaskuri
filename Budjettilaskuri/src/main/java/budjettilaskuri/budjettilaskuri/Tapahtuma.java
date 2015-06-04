@@ -26,7 +26,7 @@ public class Tapahtuma {
     
     /** Asettaa tapahtuman arvon
      * 
-     * @param arvo 
+     * @param arvo Asetettava arvo
      */
     
     public void asetaArvo(double arvo) {
@@ -34,8 +34,8 @@ public class Tapahtuma {
     }
     
     /** Asettaa tapahtumalle paivamaaran
-     * Paivamaara asetetaan muodossa "dd.mm.yyyy"
-     * @param paivamaara 
+     *
+     * @param paivamaara  Paivamaara asetetaan muodossa "dd.mm.yyyy"
      */
     
     public void asetaPaivamaara (String paivamaara) {
@@ -44,7 +44,7 @@ public class Tapahtuma {
     
     /** Asettaa nimen tapahtumalle
      * 
-     * @param nimi 
+     * @param nimi Tapahtuman nimi
      */
     
     public void asetaNimi(String nimi) {
@@ -54,7 +54,7 @@ public class Tapahtuma {
     
     /** Hakee tapahtuman arvon
      * 
-     * @return
+     * @return Tapahtuman arvo
      */
     
     public double haeArvo() {
@@ -63,7 +63,7 @@ public class Tapahtuma {
     
     /** Hakee tapahtuman paivamaaran
      * 
-     * @return 
+     * @return Tapahtuman paivamaara
      */
     
     public String haePaivamaara() {
@@ -72,7 +72,7 @@ public class Tapahtuma {
     
     /** Hakee tapahtuman nimen
      * 
-     * @return 
+     * @return Tapahtuman nimi
      */
     
     public String haeNimi() {
