@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  * Graafinen osa
  * @author mylly
  */
-public abstract class Virhe extends JFrame implements ActionListener  {
+public class Virhe extends JFrame implements ActionListener  {
     
     /**
      * Kostruktori

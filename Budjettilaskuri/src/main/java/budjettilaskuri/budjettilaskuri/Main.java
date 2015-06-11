@@ -10,6 +10,11 @@ package budjettilaskuri.budjettilaskuri;
  */
 public class Main {
     
+    /**
+     * Kaynnistaa ohjelman
+     * @param args 
+     */
+    
    public static void main(String[] args) {
        new Ohjelma();
    }
