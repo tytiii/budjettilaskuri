@@ -51,3 +51,20 @@ Testien ihmettelyä. Jotain sain aikaankin, mutta en edelleenkään tiedä miksi Net
 4.6.2015
 2h 
 Kaksi sekvenssikaaviota, myöhemmin lisää. Vähän koodia
+
+8.6.2015
+2h 
+Koodia, graafinen käyttöliittymä
+
+9.6.2015
+2h 
+Koodia, graafinen käyttöliittymä
+
+10.6.2015
+3h 
+Koodia, graafinen käyttöliittymä
+
+11.6.2015
+3h 
+Sekvenssikaavioita, koodia
+
