@@ -68,3 +68,6 @@ Koodia, graafinen käyttöliittymä
 3h 
 Sekvenssikaavioita, koodia
 
+13.6.2015
+4h koodia
+
