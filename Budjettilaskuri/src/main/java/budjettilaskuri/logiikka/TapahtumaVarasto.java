@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package budjettilaskuri.budjettilaskuri;
+package budjettilaskuri.logiikka;
 
+import budjettilaskuri.kayttoliittyma.Virhe;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import org.joda.time.DateTime;
 
 /**
  * Luokka tapahtumien käsittelylle
@@ -26,11 +28,11 @@ public class TapahtumaVarasto {
     /**
      * Kostruktori
      *
-     * @param nimi Käyttäjän nimi
+     * @param kayttaja Käyttäjän nimi
      */
-    public TapahtumaVarasto(String nimi) {
-        this.nimi = nimi.toLowerCase();
-        this.tapahtumat = new ArrayList<Tapahtuma>();
+    public TapahtumaVarasto(String kayttaja) {
+        this.nimi = kayttaja.toLowerCase();
+        this.tapahtumat = new ArrayList<>();
         this.lataaTapahtumat();
     }
 
@@ -40,16 +42,13 @@ public class TapahtumaVarasto {
      * @param kk Haluttu kuukausi muodossa Kuukausi vvvv
      * @return Pyydetyn kuukauden tapahtumat
      */
-    public ArrayList<Tapahtuma> haeTapahtumaLista(String kk) {
-        String[] kuukaudet = new String[]{"Null", "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"};
+    public ArrayList<Tapahtuma> haeTapahtumaLista(int kk, int vuosi) {
+        // TODO: test
         ArrayList<Tapahtuma> paivat = new ArrayList<Tapahtuma>();
         for (Tapahtuma t : this.tapahtumat) {
-            String[] splitattupaiva = t.haePaivamaara().split("[.]");
-            if (splitattupaiva.length == 3) {
-                String kuukausi = kuukaudet[Integer.parseInt(splitattupaiva[1])] + splitattupaiva[2];
-                if (kuukausi.equals(kk)) {
-                    paivat.add(t);
-                }
+            DateTime paiva = t.haePaivamaara();
+            if (paiva.getYear() == vuosi && paiva.getMonthOfYear() == kk + 1) {
+                paivat.add(t);
             }
         }
         return paivat;
@@ -70,6 +69,7 @@ public class TapahtumaVarasto {
      * @param t Uusi tapahtuma
      */
     public void lisaaTapahtuma(Tapahtuma t) {
+        // TODO: tarkista että ei null ja ei samoja ja testit
         this.tapahtumat.add(t);
         this.tallennaTapahtumat();
     }
@@ -90,17 +90,14 @@ public class TapahtumaVarasto {
      * @return Kuukaudet ja niiden saldo, kuukausi muodossa Kuukausi VVVV
      */
     public HashMap<String, Double> haeKuukaudet() {
-        String[] kuukaudet = new String[]{"Null", "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"};
-        HashMap<String, Double> kk = new HashMap<String, Double>();
+        // TODO: test
+        HashMap<String, Double> kk = new HashMap<>();
         for (Tapahtuma t : this.tapahtumat) {
-            String[] splitattu = t.haePaivamaara().split("[.]");
-            if (splitattu.length == 3) {
-                String pvm = kuukaudet[Integer.parseInt(splitattu[1])] + " " + splitattu[2];
-                if (!kk.containsKey(pvm)) {
-                    kk.put(pvm, 0.0);
-                }
-                kk.put(pvm, kk.get(pvm) + t.haeArvo());
+            String pvm = t.haePaivamaara().toString("MM.yyyy");
+            if (!kk.containsKey(pvm)) {
+                kk.put(pvm, 0.0);
             }
+            kk.put(pvm, kk.get(pvm) + t.haeArvo());
         }
         return kk;
     }
@@ -111,21 +108,19 @@ public class TapahtumaVarasto {
      * @param kk Haluttu kuukausi, muodossa Kuukausi VVVV
      * @return Halutun kuukauden kaikki paivat ja niiden saldot
      */
-    public HashMap<String, Double> HaePaivat(String kk) {
-        String[] kuukaudet = new String[]{"Null", "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"};
-        HashMap<String, Double> paivat = new HashMap<String, Double>();
+    public HashMap<String, Double> HaePaivat(int kk, int vuosi) {
+        // TODO: test
+        HashMap<String, Double> paivat = new HashMap<>();
         for (Tapahtuma t : this.tapahtumat) {
-            String[] splitattupaiva = t.haePaivamaara().split("[.]");
-            if (splitattupaiva.length == 3) {
-                String kuukausi = kuukaudet[Integer.parseInt(splitattupaiva[1])] + " " + splitattupaiva[2];
-                if (kuukausi.equals(kk)) {
-                    String paiva = splitattupaiva[0] + ". " + kuukaudet[Integer.parseInt(splitattupaiva[1])] + "ta " + splitattupaiva[2];
-                    if (!paivat.containsKey(paiva)) {
-                        paivat.put(paiva, 0.0);
-                    }
-                    paivat.put(paiva, paivat.get(paiva) + t.haeArvo());
-                }
+            DateTime paivamaara = t.haePaivamaara();
+            if (kk != paivamaara.getMonthOfYear() + 1 || vuosi != paivamaara.getYear()) {
+                continue;
             }
+            String paiva = paivamaara.toString("dd.MM.yyyy");
+            if (!paivat.containsKey(paiva)) {
+                paivat.put(paiva, 0.0);
+            }
+            paivat.put(paiva, paivat.get(paiva) + t.haeArvo());
         }
         return paivat;
 
@@ -137,16 +132,13 @@ public class TapahtumaVarasto {
      * @param pvm Haluttu paivamaara muodossa PV. Kuukausita VVVV
      * @return Halutun paivan tapahtumat
      */
-    public ArrayList<Tapahtuma> haePaiva(String pvm) {
-        String[] kuukaudet = new String[]{"Null", "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"};
-        ArrayList<Tapahtuma> paivat = new ArrayList<Tapahtuma>();
+    public ArrayList<Tapahtuma> haePaiva(int paiva, int kk, int vuosi) {
+        // TODO: test
+        ArrayList<Tapahtuma> paivat = new ArrayList<>();
         for (Tapahtuma t : this.tapahtumat) {
-            String[] splitattupaiva = t.haePaivamaara().split("[.]");
-            if (splitattupaiva.length == 3) {
-                String paiva = splitattupaiva[0] + ". " + kuukaudet[Integer.parseInt(splitattupaiva[1])] + "ta " + splitattupaiva[2];
-                if (pvm.equals(paiva)) {
-                    paivat.add(t);
-                }
+            DateTime paivamaara = t.haePaivamaara();
+            if (vuosi == paivamaara.getYear() && kk == paivamaara.getMonthOfYear() + 1 && paiva == paivamaara.getDayOfMonth()) {
+                paivat.add(t);   
             }
         }
         return paivat;
@@ -157,6 +149,7 @@ public class TapahtumaVarasto {
      * Lataa tapahtumat tiedostosta
      */
     public void lataaTapahtumat() {
+        // TODO: käytä TiedostonHallintaa rivien lukemiseen
         this.tapahtumat.clear();
         Scanner s = null;
         File f = new File(this.nimi + ".dat");
@@ -168,11 +161,7 @@ public class TapahtumaVarasto {
             while (s.hasNextLine()) {
                 String rivi = s.nextLine();
                 String[] data = rivi.split("[|]");
-                Tapahtuma t = new Tapahtuma();
-                t.asetaArvo(Double.parseDouble(data[0]));
-                t.asetaPaivamaara(data[1]);
-                t.asetaLuokittelu(data[2]);
-                t.asetaNimi(data[3]);
+                Tapahtuma t = new Tapahtuma(Double.parseDouble(data[0]), new DateTime(data[1]), data[2], data[3]);
                 this.tapahtumat.add(t);
 
             }
@@ -188,12 +177,14 @@ public class TapahtumaVarasto {
      * Tallentaa tapahtumat tiedostoon
      */
     public void tallennaTapahtumat() {
+        // TODO: käytä TiedostonHallintaa kirjoittamiseen
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(this.nimi + ".dat");
             PrintWriter pw = new PrintWriter(fos);
             for (Tapahtuma t : tapahtumat) {
-                pw.println(t.haeArvo() + "|" + t.haePaivamaara() + "|" + t.haeLuokittelu() + "|" + t.haeNimi());
+                // Tallenna nämä listaan, ja anna TiedostonHallinnalle
+                pw.println(t.haeArvo() + "|" + t.haePaivamaara().toString() + "|" + t.haeLuokittelu() + "|" + t.haeNimi());
             }
             pw.close();
         } catch (FileNotFoundException ex) {

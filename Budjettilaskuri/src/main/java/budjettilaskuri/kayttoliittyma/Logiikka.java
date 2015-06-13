@@ -1,5 +1,11 @@
-package budjettilaskuri.budjettilaskuri;
+package budjettilaskuri.kayttoliittyma;
 
+import budjettilaskuri.kayttoliittyma.Virhe;
+import budjettilaskuri.kayttoliittyma.AvaaKayttaja;
+import budjettilaskuri.kayttoliittyma.UusiKayttaja;
+import budjettilaskuri.logiikka.KayttajaVarasto;
+import budjettilaskuri.logiikka.Tapahtuma;
+import budjettilaskuri.logiikka.TapahtumaVarasto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -17,7 +23,7 @@ public abstract class Logiikka implements ActionListener {
 
     private Ohjelma ohjelma;
     private UusiKayttaja uusikayttaja;
-    private Kayttaja kayttajat;
+    private KayttajaVarasto kayttajat;
     private DecimalFormat muoto;
     private TapahtumaVarasto tapahtumat;
     private AvaaKayttaja ak;
@@ -29,7 +35,7 @@ public abstract class Logiikka implements ActionListener {
      */
     public Logiikka(Ohjelma o) {
         this.ohjelma = o;
-        this.kayttajat = new Kayttaja();
+        this.kayttajat = new KayttajaVarasto();
         this.muoto = new DecimalFormat("####.##");
     }
     
@@ -59,7 +65,7 @@ public abstract class Logiikka implements ActionListener {
             String nimi = this.ak.haenimi();
             if(nimi!=null) {
                 this.taytaKuukaudet(nimi);
-                this.ohjelma.disabloi(true);
+                this.ohjelma.kentatAktivoitu(true);
             }
             this.ak.dispose();
         }
@@ -67,14 +73,14 @@ public abstract class Logiikka implements ActionListener {
            String kk = this.ohjelma.haeKK();
            if(kk!= null) {
             String[] splitattu = kk.split(" ");
-            this.taytaPaivat(splitattu[0] + " " + splitattu[1]);
+            this.taytaPaivat(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]));
             }
         }
         else if(komento.equals("PAIVA")) {
           String pv = this.ohjelma.HaePV();
           if(pv!=null) {
            String[] splitattu = pv.split(" ");
-           this.taytaPaiva(splitattu[0] + " " + splitattu[1] + " " + splitattu[2]);
+           this.taytaPaiva(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]), Integer.parseInt(splitattu[2]));
           }
         }
         else if(komento.equals("LISAA")) {
@@ -101,11 +107,11 @@ public abstract class Logiikka implements ActionListener {
         this.taytaKuukaudet(this.tapahtumat.haeNimi());
         if(kk!= null) {
             String[] splitattu = kk.split(" ");
-            this.taytaPaivat(splitattu[0] + " " + splitattu[1]);
+            this.taytaPaivat(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]));
         }
         if(pv!=null) {
             String[] splitattu = pv.split(" ");
-            this.taytaPaiva(splitattu[0] + " " + splitattu[1] + " " + splitattu[2]);
+            this.taytaPaiva(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]), Integer.parseInt(splitattu[2]));
         }
     }
     /**
@@ -128,8 +134,8 @@ public abstract class Logiikka implements ActionListener {
      * Tayttaa paivalistauksen
      * @param kk  Haluttu kuukausi
      */
-    public void taytaPaivat(String kk) {
-        HashMap<String, Double> paivat = this.tapahtumat.HaePaivat(kk);
+    public void taytaPaivat(int kk, int vuosi) {
+        HashMap<String, Double> paivat = this.tapahtumat.HaePaivat(kk, vuosi);
         String[] pv_data = new String[paivat.size()];
         int i = 0;
         for(String key : paivat.keySet()) {
@@ -144,21 +150,17 @@ public abstract class Logiikka implements ActionListener {
      */
     public void muokkaa() {
         String pv = this.ohjelma.HaePV();
-        String muokattupv;
-        if(pv!=null) {
-           String[] splitattu = pv.split(" ");
-           muokattupv = splitattu[0] + " " + splitattu[1] + " " + splitattu[2];
-          }
-        else {
-            new Virhe("Päivämäärä väärässä muodossa");
-            return;
-        }
         int indeksi = this.ohjelma.haeValittu();
         if(pv != null && indeksi>=0) {
-            ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(muokattupv);
+            String[] splitattu = pv.split(" ");
+            ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]), Integer.parseInt(splitattu[2]));
             this.ohjelma.taytaKentat(paivat.get(indeksi));
             this.tapahtumat.poistaTapahtuma(paivat.get(indeksi));
             this.paivita();
+        } else {
+            new Virhe("Päivämäärä väärässä muodossa");
+            return;
+            
         }
     }
     /**
@@ -166,15 +168,10 @@ public abstract class Logiikka implements ActionListener {
      */
     public void poistaTapahtuma() {
         String pv = this.ohjelma.HaePV();
-        String muokattupv;
-        if(pv!=null) {
-           String[] splitattu = pv.split(" ");
-           muokattupv = splitattu[0] + " " + splitattu[1] + " " + splitattu[2];
-          }
-        else return;
         int indeksi = this.ohjelma.haeValittu();
         if(pv != null && indeksi>=0) {
-            ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(muokattupv);
+            String[] splitattu = pv.split(" ");
+            ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(Integer.parseInt(splitattu[0]), Integer.parseInt(splitattu[1]), Integer.parseInt(splitattu[2]));
             this.tapahtumat.poistaTapahtuma(paivat.get(indeksi));
             this.paivita();
         }
@@ -183,8 +180,8 @@ public abstract class Logiikka implements ActionListener {
      * Taytta paivan tapahtumat listaukseen
      * @param pv  Valittu paiva
      */
-    public void taytaPaiva(String pv) {
-        ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(pv);
+    public void taytaPaiva(int pv, int kk, int vuosi) {
+        ArrayList<Tapahtuma> paivat = this.tapahtumat.haePaiva(pv, kk, vuosi);
         String[] pv_data = new String[paivat.size()];
         int i = 0;
         for(Tapahtuma t : paivat) {

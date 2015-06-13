@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package budjettilaskuri.budjettilaskuri;
+package budjettilaskuri.kayttoliittyma;
+import budjettilaskuri.kayttoliittyma.Logiikka;
+import budjettilaskuri.logiikka.Tapahtuma;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -146,7 +148,7 @@ public class Ohjelma extends JFrame {
                 maalaa();
             }
         });
-    this.disabloi(false);    
+        this.kentatAktivoitu(true);    
     }
                 
     
@@ -154,7 +156,7 @@ public class Ohjelma extends JFrame {
      * Muokkaa tietokenttien toimivuutta
      * @param b  Haluttu toimivuus
      */
-    public void disabloi(boolean b) {
+    public void kentatAktivoitu(boolean b) {
         this.uusitapahtuma_kategoria.setEnabled(b);
         this.uusitapahtuma_nimi.setEnabled(b);
         this.uusitapahtuma_pvm.setEnabled(b);
@@ -192,7 +194,7 @@ public class Ohjelma extends JFrame {
             double summa = Double.parseDouble(this.uusitapahtuma_summa.getText());
             t.asetaArvo(summa);
             t.asetaLuokittelu(this.kategoria[this.uusitapahtuma_kategoria.getSelectedIndex()]);
-            t.asetaPaivamaara(pvm);
+            t.asetaPaivamaara(v, kk, pv);
             t.asetaNimi(this.uusitapahtuma_nimi.getText());
            }
         catch(NumberFormatException nfe) {
@@ -221,7 +223,7 @@ public class Ohjelma extends JFrame {
         }
         this.uusitapahtuma_kategoria.setSelectedIndex(indeksi);
         this.uusitapahtuma_nimi.setText(t.haeNimi());
-        this.uusitapahtuma_pvm.setText(t.haePaivamaara());
+        this.uusitapahtuma_pvm.setText(t.haePaivamaara().toString("dd.MM.yyyy"));
         this.uusitapahtuma_summa.setText(""+t.haeArvo());
     }
     

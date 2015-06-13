@@ -1,10 +1,11 @@
-/*
+    /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package budjettilaskuri.budjettilaskuri;
+package budjettilaskuri.logiikka;
 
 import java.text.DecimalFormat;
+import org.joda.time.DateTime;
 
 /**
  * Luokka Budjettilaskurin tapahtumille
@@ -14,19 +15,26 @@ import java.text.DecimalFormat;
 public class Tapahtuma {
 
     private double arvo;
-    private String paivamaara;
+    private DateTime paivamaara;
     private String nimi;
     private String luokittelu;
 
+    public Tapahtuma() {
+        this.arvo = 0.0;
+        this.paivamaara = new DateTime();
+        this.nimi = "-";
+        this.luokittelu = "-";
+    }
+    
     /**
      * Konstruktori
      *
      */
-    public Tapahtuma() {
-        this.arvo = 0;
-        this.paivamaara = "-";
-        this.nimi = "-";
-        this.luokittelu = "-";
+    public Tapahtuma(double arvo, DateTime paivamaara, String nimi, String luokittelu) {
+        this.arvo = arvo;
+        this.paivamaara = paivamaara;
+        this.nimi = nimi;
+        this.luokittelu = luokittelu;
     }
 
     /**
@@ -41,10 +49,10 @@ public class Tapahtuma {
     /**
      * Asettaa tapahtumalle paivamaaran
      *
-     * @param paivamaara Paivamaara asetetaan muodossa "dd.mm.yyyy"
+     * @param paivamaara Paivamaara asetetaan muodossa "pp.kk.vvvv"
      */
-    public void asetaPaivamaara(String paivamaara) {
-        this.paivamaara = paivamaara;
+    public void asetaPaivamaara(int vuosi, int kuukausi, int paiva) {
+        this.paivamaara = new DateTime(vuosi, kuukausi+1, paiva, 0, 0);
     }
 
     /**
@@ -59,7 +67,7 @@ public class Tapahtuma {
      */
     public void asetaLuokittelu(String luokittelu) {
         this.luokittelu = luokittelu;
-        if (luokittelu.length() == 0) {
+        if (luokittelu == null || luokittelu.length() == 0) {
             this.luokittelu = "-";
         }
 
@@ -67,7 +75,7 @@ public class Tapahtuma {
 
     public void asetaNimi(String nimi) {
         this.nimi = nimi;
-        if (nimi.length() == 0) {
+        if (nimi == null || nimi.length() == 0) {
             this.nimi = "-";
         }
     }
@@ -86,7 +94,7 @@ public class Tapahtuma {
      *
      * @return Tapahtuman paivamaara
      */
-    public String haePaivamaara() {
+    public DateTime haePaivamaara() {
         return this.paivamaara;
     }
 
@@ -108,6 +116,7 @@ public class Tapahtuma {
         return this.nimi;
     }
 
+    @Override
     public String toString() {
         DecimalFormat tulostus = new DecimalFormat("####.##");
 

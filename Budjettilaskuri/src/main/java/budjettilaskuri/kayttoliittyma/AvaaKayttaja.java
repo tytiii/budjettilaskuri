@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package budjettilaskuri.budjettilaskuri;
+package budjettilaskuri.kayttoliittyma;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
