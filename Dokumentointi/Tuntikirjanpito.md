@@ -71,3 +71,10 @@ Sekvenssikaavioita, koodia
 13.6.2015
 4h koodia
 
+17.6.2015
+2h 
+Yritetty taas saada koodia siihen kuntoon, että toimisi. Samoin testejä..
+
+18.6.2015
+4h 
+Yritetty vielä tehdä toimivaksi, mutta edelleenkin vain käyttäjän lisäys onnistuu..
