@@ -38,7 +38,7 @@ public class UusiKayttaja extends JFrame{
         JButton ok = new JButton("OK");
         ok.setLocation(10,60);
         ok.setSize(80,20);
-        ok.setActionCommand("UUSI OK");
+        ok.setActionCommand("UUSIOK");
         ok.addActionListener(logiikka);
         paneeli.add(label);
         paneeli.add(nimi);
